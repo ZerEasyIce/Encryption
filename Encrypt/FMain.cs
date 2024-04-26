@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.SqlTypes;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
@@ -16,8 +17,8 @@ namespace Encryption
         private void FMain_Load(object sender, EventArgs e)
         {
             //encryptionKey = "SecretEncryptKey"; // Change this to your own secret key (16 chars) : รหัสลับของเรา 16 ตัวอักษร
-            txt_KeyEncrypt.Text = "SecretEncryptKey";
-            txt_KeyHash.Text = "SecretHashingKey"; 
+            txt_KeyEncrypt.Text = "@AutoMotionWorks";
+            txt_KeyHash.Text = "@AutoMotionWorks";
         }
 
         #region ### Encrypt ###
@@ -88,6 +89,7 @@ namespace Encryption
             {
                 byte[] hashBytes = MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(data));
                 resHash = BitConverter.ToString(hashBytes).Replace("-", "");    // แปลงค่า Hashing เป็นค่า hexadecimal
+                GetHashing(data);
             }
             else if (ccb_Hashing.SelectedIndex == 1)  // Hashing SHA-1
             {
@@ -116,7 +118,7 @@ namespace Encryption
             else if (ccb_Hashing.SelectedIndex == 6)  // Hashing HMAC
             {
                 string key = txt_KeyHash.Text;     // คีย์ HMAC
-                if(key == "")
+                if (key == "")
                 {
                     MessageBox.Show("กรุณากรอก KEY: Hashing");
                     return;
@@ -138,6 +140,40 @@ namespace Encryption
         }
         #endregion
 
+        #region ### Salt ###
+
+        private void GetHashing(string data)
+        {
+            string saltValue = GenerateSalt();
+            /*byte[] saltBytes = Encoding.UTF8.GetBytes(saltValue);
+            byte[] dataBytes = Encoding.UTF8.GetBytes(data);
+
+            byte[] combinedBytes = new byte[saltBytes.Length + dataBytes.Length];
+            Array.Copy(saltBytes, 0, combinedBytes, 0, saltBytes.Length);
+            Array.Copy(dataBytes, 0, combinedBytes, saltBytes.Length, dataBytes.Length);
+            byte[] hashBytes = SHA256.Create().ComputeHash(combinedBytes);
+            string hashValue = BitConverter.ToString(hashBytes).Replace("-", "");
+            txt_Salt.Text = hashValue;*/
+            txt_Salt.Text = saltValue;
+        }
+        private void GetSalt()
+        {
+            string saltValue = GenerateSalt();
+            byte[] saltBytes = Encoding.UTF8.GetBytes(saltValue);
+        }
+
+        private string GenerateSalt()
+        {
+            using (var rng = new RNGCryptoServiceProvider())
+            {
+                byte[] saltBytes = new byte[16];
+                rng.GetBytes(saltBytes);
+
+                return Convert.ToBase64String(saltBytes);
+            }
+        }
+        #endregion
+
         private void ccb_Hashing_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (ccb_Hashing.SelectedIndex == 6)
@@ -145,5 +181,6 @@ namespace Encryption
                 txt_KeyHash.Enabled = true;
             }
         }
+
     }
 }

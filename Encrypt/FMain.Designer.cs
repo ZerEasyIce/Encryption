@@ -133,7 +133,7 @@
             // 
             this.txt_Hashing.Location = new System.Drawing.Point(281, 46);
             this.txt_Hashing.Name = "txt_Hashing";
-            this.txt_Hashing.Size = new System.Drawing.Size(237, 20);
+            this.txt_Hashing.Size = new System.Drawing.Size(255, 20);
             this.txt_Hashing.TabIndex = 1;
             // 
             // label5
@@ -149,7 +149,7 @@
             // 
             this.txt_ResHash.Location = new System.Drawing.Point(281, 148);
             this.txt_ResHash.Name = "txt_ResHash";
-            this.txt_ResHash.Size = new System.Drawing.Size(237, 20);
+            this.txt_ResHash.Size = new System.Drawing.Size(255, 20);
             this.txt_ResHash.TabIndex = 1;
             // 
             // label6
@@ -182,7 +182,7 @@
             // 
             this.txt_Salt.Location = new System.Drawing.Point(281, 199);
             this.txt_Salt.Name = "txt_Salt";
-            this.txt_Salt.Size = new System.Drawing.Size(237, 20);
+            this.txt_Salt.Size = new System.Drawing.Size(255, 20);
             this.txt_Salt.TabIndex = 3;
             // 
             // label8
@@ -218,7 +218,7 @@
             "HMAC (Hash-based Message Authentication Code)"});
             this.ccb_Hashing.Location = new System.Drawing.Point(281, 97);
             this.ccb_Hashing.Name = "ccb_Hashing";
-            this.ccb_Hashing.Size = new System.Drawing.Size(237, 21);
+            this.ccb_Hashing.Size = new System.Drawing.Size(255, 21);
             this.ccb_Hashing.TabIndex = 4;
             this.ccb_Hashing.SelectedIndexChanged += new System.EventHandler(this.ccb_Hashing_SelectedIndexChanged);
             // 
@@ -244,7 +244,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(529, 277);
+            this.ClientSize = new System.Drawing.Size(548, 277);
             this.Controls.Add(this.ccb_Hashing);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label6);
